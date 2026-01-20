@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="9A0F4C66";
-$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QlVyWE5KZUhXVUJIwREU2OTlBMjJBR";
-$codigoControl1="0826769E55A6D74";
+$cuis1="C5CD5D6";
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
+$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="EB17D75E";
-$codigo0="BQUE5Q05FQkJBNzjdEODFGRDM1NkU=QsKhbUFTT2VIV1VIwREU2OTlBMjJBR";
-$codigoControl0="43CDA89165A6D74";
+$cuis0="57C54491";
+$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QjlPM2hMVUJhVUMzcxNTE1QjRCMT";
+$codigoControl0="22ABCBD2987AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=0;
@@ -22,14 +22,13 @@ $codigoControl=$codigoControl0;
 $cufd=$codigo0;
 $cuis=$cuis0;
 
-
 $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTRUxBX09SVTgzMSIsImNvZGlnb1Npc3RlbWEiOiI3MjBERTY5OUEyMkFGN0Q4MUZEMzU2RSIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNRFF3TVRRMk1ESURBS2tRRzB3S0FBQUEiLCJpZCI6MjcyNjcsImV4cCI6MTY3MjQ0NDgwMCwiaWF0IjoxNjU1MTM1NzM2LCJuaXREZWxlZ2FkbyI6MTAxMDQxMzAyNiwic3Vic2lzdGVtYSI6IlNGRSJ9.dOFu7xY7ts0B6GVPKZ662HvdMBwElPfmxMs8hgrDpR9Y5aLsAkBvnvryfbp93D5XUq7ore0SQevztlxolFWxNA";
 $codigoAmbiente="2";
 $codigoDocumentoSector=24; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
-$codigoEmision=1;
+$codigoEmision=1;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="720DE699A22AF7D81FD356E";
+$codigoSistema="371515B4B16CE0E3A916";
 $codigoSucursal=0;
 
 $nit="1010413026";
@@ -50,7 +49,7 @@ deleteFile();
 //     * @param nf Numero de Factura
 //     * @param pos Punto de Venta
 
-for ($i=1;$i<=10;$i++){
+for ($i=1;$i<=1;$i++){
     $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
     $fechaEnvio=date("Y-m-d\TH:i:s").".$miliSegundo";
     $cuf = new CUF();
@@ -173,6 +172,25 @@ for ($i=1;$i<=10;$i++){
         ]
     ]);
     var_dump($result);
+//    exit();
+    $result= $client->anulacionDocumentoAjuste([
+        "SolicitudServicioAnulacionDocumentoAjuste"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "codigoMotivo"=>1,
+            "cuf"=>$cuf,
+        ]
+    ]);
+    var_dump($result);
 }
 
 
@@ -217,7 +235,7 @@ function firmar($fileName){
 
     $objDSig->sign($objKey);
 
-    $objDSig->add509Cert(file_get_contents('key/selaimpuestos.pem'));
+    $objDSig->add509Cert(file_get_contents('key/publicKey.pem'));
 
     $objDSig->appendSignature($doc->documentElement);
     $doc->save($fileName);

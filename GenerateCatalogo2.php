@@ -1,17 +1,17 @@
 <?php
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="ECB7F858";
-$cuis0="CB4C4B6F";
-$codigoPuntoVenta=0;
-$cuis=$cuis0;
+$cuis1="C5CD5D6";
+$cuis0="57C54491";
+$codigoPuntoVenta=1;
+$cuis=$cuis1;
 
-$nit="555441026";
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJheWFsYWVkc29uMjAxM0BnbWFpbC5jb20iLCJjb2RpZ29TaXN0ZW1hIjoiMzUyMjkyREE1Mzk0ODUyMTVCQkUiLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0xTlRVeE1UUXdNZ01BbnFhbE1Ba0FBQUE9IiwiaWQiOjUwNjIzNzIsImV4cCI6MTc2NzIxMDc2NywiaWF0IjoxNzU4NjcxNTM3LCJuaXREZWxlZ2FkbyI6NTU1NDQxMDI2LCJzdWJzaXN0ZW1hIjoiU0ZFIn0.g5L5FEVm6OUo0h1nzlf3iATSp_THBZMVWFU8nPsgzooncshKMnhILmg5O8m5T6UqG-sbDUWNE6ClIquVW0uPRw";
+$nit="1010413026";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
 $codigoAmbiente=2;
-$codigoSistema="352292DA539485215BBE";
+$codigoSistema="371515B4B16CE0E3A916";
 
-$contador = 124;
+$contador = 1;
 
 for ($i=0; $i < $contador; $i++) {
     $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/FacturacionSincronizacion?WSDL",  [

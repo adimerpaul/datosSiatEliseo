@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="9A0F4C66";
-$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnwoNkJKQ0lXVUJIwREU2OTlBMjJBR";
-$codigoControl1="9D2D7D0226B6D74";
+$cuis1="C5CD5D6";
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
+$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="EB17D75E";
-$codigo0="BQUE5Q05FQkJBNzjdEODFGRDM1NkU=QmXCrGx2SUNJV1VIwREU2OTlBMjJBR";
-$codigoControl0="3979CAB126B6D74";
+$cuis0="57C54491";
+$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QlVPSndTVUJhVUMzcxNTE1QjRCMT";
+$codigoControl0="66BC1E17987AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=0;
@@ -23,13 +23,20 @@ $cufd=$codigo0;
 $cuis=$cuis0;
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTRUxBX09SVTgzMSIsImNvZGlnb1Npc3RlbWEiOiI3MjBERTY5OUEyMkFGN0Q4MUZEMzU2RSIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNRFF3TVRRMk1ESURBS2tRRzB3S0FBQUEiLCJpZCI6MjcyNjcsImV4cCI6MTY3MjQ0NDgwMCwiaWF0IjoxNjU1MTM1NzM2LCJuaXREZWxlZ2FkbyI6MTAxMDQxMzAyNiwic3Vic2lzdGVtYSI6IlNGRSJ9.dOFu7xY7ts0B6GVPKZ662HvdMBwElPfmxMs8hgrDpR9Y5aLsAkBvnvryfbp93D5XUq7ore0SQevztlxolFWxNA";
+$cantidad=1;
+$codigoMotivoEvento=4;
+$h="18";
+$m="49";
+$s="00";
+
+
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
 $codigoAmbiente="2";
 $codigoDocumentoSector=13; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=2;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="720DE699A22AF7D81FD356E";
+$codigoSistema="371515B4B16CE0E3A916";
 $codigoSucursal=0;
 
 $nit="1010413026";
@@ -50,14 +57,268 @@ deleteFile();
 //     * @param nf Numero de Factura
 //     * @param pos Punto de Venta
 
-for ($i=1;$i<=1;$i++){
-    $h="12";
-    $m="41";
-    $s="02";
+for ($y=1;$y<=10;$y++){
+    deleteFile();
+    $client = new SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/FacturacionOperaciones?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+    $result= $client->registroEventoSignificativo([
+        "SolicitudEventoSignificativo"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoMotivoEvento"=>$codigoMotivoEvento,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cufdEvento"=>$cufd,
+            "cuis"=>$cuis,
+            "descripcion"=>$codigoMotivoEvento,
+            "fechaHoraFinEvento"=>date("Y-m-d\T$h:$m:$s").".600",
+            "fechaHoraInicioEvento"=>date("Y-m-d\T$h:$m:$s").".000",
+            "nit"=>$nit
+        ]
+    ]);
+    var_dump($result);
+//    exit();
+    $codigoEvento=$result->RespuestaListaEventos->codigoRecepcionEventoSignificativo;
+//error_log("codigoMotivoEvento: ".json_encode($codigoMotivoEvento));
+//exit;
+
+
+    for ($i=1;$i<=$cantidad;$i++){
+        $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
+        $fechaEnvio=date("Y-m-d\T$h:$m:$s").".$miliSegundo";
+        $cuf = new CUF();
+        $cuf = $cuf->obtenerCUF($nit, date("Ymd".$h.$m.$s."$miliSegundo"), $codigoSucursal, $codigoModalidad, $codigoEmision, $cdf, $codigoDocumentoSector, $nf, $codigoPuntoVenta);
+        $cuf=$cuf.$codigoControl;
+
+        /*$data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<facturaComputarizadaCompraVenta xsi:noNamespaceSchemaLocation='facturaComputarizadaCompraVenta.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    <cabecera>
+        <nitEmisor>$nit</nitEmisor>
+        <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
+        <municipio>La Paz</municipio>
+        <telefono>78595684</telefono>
+        <numeroFactura>1</numeroFactura>
+        <cuf>$cuf</cuf>
+        <cufd>$cufd</cufd>
+        <codigoSucursal>0</codigoSucursal>
+        <direccion>AV. JORGE LOPEZ #123</direccion>
+    <codigoPuntoVenta>$codigoPuntoVenta</codigoPuntoVenta>
+        <fechaEmision>$fechaEnvio</fechaEmision>
+        <nombreRazonSocial>Mi razon social</nombreRazonSocial>
+        <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
+        <numeroDocumento>5115889</numeroDocumento>
+        <complemento xsi:nil='true'/>
+        <codigoCliente>51158891</codigoCliente>
+        <codigoMetodoPago>1</codigoMetodoPago>
+        <numeroTarjeta xsi:nil='true'/>
+        <montoTotal>99</montoTotal>
+        <montoTotalSujetoIva>99</montoTotalSujetoIva>
+        <codigoMoneda>1</codigoMoneda>
+        <tipoCambio>1</tipoCambio>
+        <montoTotalMoneda>99</montoTotalMoneda>
+        <montoGiftCard xsi:nil='true'/>
+        <descuentoAdicional>1</descuentoAdicional>
+        <codigoExcepcion xsi:nil='true'/>
+        <cafc>$cafc</cafc>
+        <leyenda>Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los
+            servicios que utilices.
+        </leyenda>
+        <usuario>pperez</usuario>
+        <codigoDocumentoSector>1</codigoDocumentoSector>
+    </cabecera>
+    <detalle>
+        <actividadEconomica>463000</actividadEconomica>
+        <codigoProductoSin>62121</codigoProductoSin>
+        <codigoProducto>JN-131231</codigoProducto>
+        <descripcion>JUGO DE NARANJA EN VASO</descripcion>
+        <cantidad>1</cantidad>
+        <unidadMedida>1</unidadMedida>
+        <precioUnitario>100</precioUnitario>
+        <montoDescuento>0</montoDescuento>
+        <subTotal>100</subTotal>
+        <numeroSerie>124548</numeroSerie>
+        <numeroImei>545454</numeroImei>
+    </detalle>
+</facturaComputarizadaCompraVenta>";*/
+        $data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<facturaElectronicaServicioBasico xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+                                  xsi:noNamespaceSchemaLocation='facturaElectronicaServicioBasico.xsd'>
+    <cabecera>
+        <nitEmisor>$nit</nitEmisor>
+        <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
+        <municipio>La Paz</municipio>
+        <telefono>2846005</telefono>
+        <numeroFactura>1</numeroFactura>
+        <cuf>$cuf</cuf>
+        <cufd>$cufd</cufd>
+        <codigoSucursal>0</codigoSucursal>
+        <direccion>AV. JORGE LOPEZ #123</direccion>
+        <codigoPuntoVenta>$codigoPuntoVenta</codigoPuntoVenta>
+        <mes>Marzo</mes>
+        <gestion>2022</gestion>
+        <ciudad>La Paz</ciudad>
+        <zona>Alto Obrajes</zona>
+        <numeroMedidor>3456</numeroMedidor>
+        <fechaEmision>$fechaEnvio</fechaEmision>
+        <nombreRazonSocial>Mi razon social</nombreRazonSocial>
+        <domicilioCliente>Av. Tejada Sorzano 231</domicilioCliente>
+        <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
+        <numeroDocumento>5115889</numeroDocumento>
+        <complemento xsi:nil='true'/>
+        <codigoCliente>51158891</codigoCliente>
+        <codigoMetodoPago>1</codigoMetodoPago>
+        <numeroTarjeta xsi:nil='true'/>
+        <montoTotal>100.50</montoTotal>
+        <montoTotalSujetoIva>86</montoTotalSujetoIva>
+        <consumoPeriodo xsi:nil='true'/>
+        <beneficiarioLey1886 xsi:nil='true'/>
+        <montoDescuentoLey1886 xsi:nil='true'/>
+        <montoDescuentoTarifaDignidad xsi:nil='true'/>
+        <tasaAseo>5</tasaAseo>
+        <tasaAlumbrado>2</tasaAlumbrado>
+        <ajusteNoSujetoIva>5</ajusteNoSujetoIva>
+        <detalleAjusteNoSujetoIva>{'Ajuste por Reclamo':5}</detalleAjusteNoSujetoIva>
+        <ajusteSujetoIva>10</ajusteSujetoIva>
+        <detalleAjusteSujetoIva>{'Cobropor Reconexión':10}</detalleAjusteSujetoIva>
+        <otrosPagosNoSujetoIva>7</otrosPagosNoSujetoIva>
+        <detalleOtrosPagosNoSujetoIva>{'Pago Cuota Cooperativa':7}</detalleOtrosPagosNoSujetoIva>
+        <otrasTasas>0.50</otrasTasas>
+        <codigoMoneda>1</codigoMoneda>
+        <tipoCambio>1</tipoCambio>
+        <montoTotalMoneda>100.50</montoTotalMoneda>
+        <descuentoAdicional xsi:nil='true'/>
+        <codigoExcepcion xsi:nil='true'/>
+        <cafc xsi:nil='true'/>
+        <leyenda>Una leyenda</leyenda>
+        <usuario>vjcm</usuario>
+        <codigoDocumentoSector>13</codigoDocumentoSector>
+    </cabecera>
+    <detalle>
+        <actividadEconomica>841001</actividadEconomica>
+        <codigoProductoSin>991009</codigoProductoSin>
+        <codigoProducto>123456</codigoProducto>
+        <descripcion>Servicio Mes Febrero</descripcion>
+        <cantidad>1</cantidad>
+        <unidadMedida>58</unidadMedida>
+        <precioUnitario>76</precioUnitario>
+        <montoDescuento xsi:nil='true'/>
+        <subTotal>76</subTotal>
+    </detalle>
+</facturaElectronicaServicioBasico>
+";
+        $xml = new SimpleXMLElement($data);
+        $dom = new DOMDocument('1.0');
+        $dom->preserveWhiteSpace = false;
+        $dom->formatOutput = true;
+        $dom->loadXML($xml->asXML());
+        $nameFile=str_replace(' ', '', microtime());
+        $dom->save("archivos/".$nameFile.'.xml');
+
+        firmar("archivos/".$nameFile.'.xml');
+
+        $xml = new DOMDocument();
+        $xml->load("archivos/".$nameFile.'.xml');
+        if (!$xml->schemaValidate('./facturaElectronicaServicioBasico.xsd')) {
+            echo "invalid";
+        }
+        else {
+            echo "$i validated\n";
+        }
+    }
+//    exit();
+    $archiveName="archivos/archive".$y.".tar";
+    createZip($archiveName);
+    $archivo=getFileGzip($archiveName.".gz");
+    $hashArchivo=hash('sha256', $archivo);
+    $fechaEnvio=date('Y-m-d\TH:i:s.000');
+    $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionServicioBasico?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+
+    $result= $client->recepcionPaqueteFactura([
+        "SolicitudServicioRecepcionPaquete"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "archivo"=>$archivo,
+            "fechaEnvio"=>$fechaEnvio,
+            "hashArchivo"=>$hashArchivo,
+            "cantidadFacturas"=>$cantidad,
+            "codigoEvento"=>$codigoEvento,
+//            "cafc"=>$cafc,
+        ]
+    ]);
+    var_dump($result);
+//    exit();
+//var_dump($result->RespuestaServicioFacturacion);
+//echo $result->RespuestaServicioFacturacion->codigoRecepcion;
+    $sw=true;
+    while ($sw){
+        sleep(1);
+        $result= $client->validacionRecepcionPaqueteFactura([
+            "SolicitudServicioValidacionRecepcionPaquete"=>[
+                "codigoAmbiente"=>$codigoAmbiente,
+                "codigoDocumentoSector"=>$codigoDocumentoSector,
+                "codigoEmision"=>$codigoEmision,
+                "codigoModalidad"=>$codigoModalidad,
+                "codigoPuntoVenta"=>$codigoPuntoVenta,
+                "codigoSistema"=>$codigoSistema,
+                "codigoSucursal"=>$codigoSucursal,
+                "cufd"=>$cufd,
+                "cuis"=>$cuis,
+                "nit"=>$nit,
+                "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+                "codigoRecepcion"=>$result->RespuestaServicioFacturacion->codigoRecepcion
+            ]
+        ]);
+        var_dump($result);
+        if ($result->RespuestaServicioFacturacion->codigoDescripcion=="VALIDADA"){
+            $sw=false;
+        }
+    }
+    $svalInt = (int)$s+1;
+    $s=str_pad($svalInt, 2, '0', STR_PAD_LEFT);
+    error_log("s: ".$s);
+//    exit();
+}
+exit();
+
+
+$cantidad =5 ;
+for ($i=1;$i<=$cantidad;$i++){
     $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
-    $fechaEnvio=date("Y-m-d\T$h:$m:$s").".$miliSegundo";
+    $fechaEnvio=date("Y-m-d\TH:i:s").".$miliSegundo";
     $cuf = new CUF();
-    $cuf = $cuf->obtenerCUF($nit, date("Ymd".$h.$m.$s."$miliSegundo"), $codigoSucursal, $codigoModalidad, $codigoEmision, $cdf, $codigoDocumentoSector, $nf, $codigoPuntoVenta);
+//    $cuf = $cuf->obtenerCUF($nit, date("Ymd".$h.$m.$s."$miliSegundo"), $codigoSucursal, $codigoModalidad, $codigoEmision, $cdf, $codigoDocumentoSector, $nf, $codigoPuntoVenta);
+    $cuf = $cuf->obtenerCUF($nit, date("YmdHis$miliSegundo"), $codigoSucursal, $codigoModalidad, $codigoEmision, $cdf, $codigoDocumentoSector, $nf, $codigoPuntoVenta);
     $cuf=$cuf.$codigoControl;
     $xml = new SimpleXMLElement("<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <facturaElectronicaServicioBasico xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
@@ -144,47 +405,48 @@ for ($i=1;$i<=1;$i++){
     }
 //    exit;
 
-//    $file = "archivos/".$nameFile.'.xml';
-//    $gzfile = "archivos/".$nameFile.'.xml'.'.gz';
-//    $fp = gzopen ($gzfile, 'w9');
-//    gzwrite ($fp, file_get_contents($file));
-//    gzclose($fp);
-//
-//    $archivo=getFileGzip("archivos/".$nameFile.'.xml'.'.gz');
-//    $hashArchivo=hash('sha256', $archivo);
-//
-//    $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?WSDL",  [
-//        'stream_context' => stream_context_create([
-//            'http' => [
-//                'header' => "apikey: TokenApi " . $token,
-//            ]
-//        ]),
-//        'cache_wsdl' => WSDL_CACHE_NONE,
-//        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-//        'trace' => 1,
-//        'use' => SOAP_LITERAL,
-//        'style' => SOAP_DOCUMENT,
-//    ]);
-//    $result= $client->recepcionFactura([
-//        "SolicitudServicioRecepcionFactura"=>[
-//            "codigoAmbiente"=>$codigoAmbiente,
-//            "codigoDocumentoSector"=>$codigoDocumentoSector,
-//            "codigoEmision"=>$codigoEmision,
-//            "codigoModalidad"=>$codigoModalidad,
-//            "codigoPuntoVenta"=>$codigoPuntoVenta,
-//            "codigoSistema"=>$codigoSistema,
-//            "codigoSucursal"=>$codigoSucursal,
-//            "cufd"=>$cufd,
-//            "cuis"=>$cuis,
-//            "nit"=>$nit,
-//            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
-//            "archivo"=>$archivo,
-//            "fechaEnvio"=>$fechaEnvio,
-//            "hashArchivo"=>$hashArchivo,
-//        ]
-//    ]);
-//    var_dump($result);
+    $file = "archivos/".$nameFile.'.xml';
+    $gzfile = "archivos/".$nameFile.'.xml'.'.gz';
+    $fp = gzopen ($gzfile, 'w9');
+    gzwrite ($fp, file_get_contents($file));
+    gzclose($fp);
+
+    $archivo=getFileGzip("archivos/".$nameFile.'.xml'.'.gz');
+    $hashArchivo=hash('sha256', $archivo);
+
+    $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionServicioBasico?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+    $result= $client->recepcionFactura([
+        "SolicitudServicioRecepcionFactura"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "archivo"=>$archivo,
+            "fechaEnvio"=>$fechaEnvio,
+            "hashArchivo"=>$hashArchivo,
+        ]
+    ]);
+    var_dump($result);
 }
+exit();
 createZip();
 $archivo=getFileGzip("archivos/archive.tar.gz");
 $hashArchivo=hash('sha256', $archivo);
@@ -247,15 +509,16 @@ while (true){
 }
 
 
-function createZip(){
+function createZip($archiveName){
     try
     {
-        $a = new PharData('archivos/archive.tar');
+        $a = new PharData($archiveName);
 
         // ADD FILES TO archive.tar FILE
         $files = glob('archivos/*'); //obtenemos todos los nombres de los ficheros
         $count = 0;
         foreach($files as $file){
+            error_log('creando zip: '.$file);
             $a->addFile($file); //Agregamos el fichero
             $count++;
             echo $count."\n";
@@ -265,7 +528,7 @@ function createZip(){
         $a->compress(Phar::GZ);
 
         // NOTE THAT BOTH FILES WILL EXISTS. SO IF YOU WANT YOU CAN UNLINK archive.tar
-        unlink('archivos/archive.tar');
+//        unlink('archivos/archive.tar');
     }
     catch (Exception $e)
     {
@@ -274,9 +537,9 @@ function createZip(){
 }
 function getFileGzip($fileName)
 {
-    $fileName = $fileName;
+    $file = $fileName;
 
-    $handle = fopen($fileName, "rb");
+    $handle = fopen($file, "rb");
     $contents = fread($handle, filesize($fileName));
     fclose($handle);
 
@@ -308,11 +571,11 @@ function firmar($fileName){
     If key has a passphrase, set it using
     $objKey->passphrase = '<passphrase>';
     */
-    $objKey->loadKey('key/privatekey.pem', TRUE);
+    $objKey->loadKey('key/privateKey.pem', TRUE);
 
     $objDSig->sign($objKey);
 
-    $objDSig->add509Cert(file_get_contents('key/selaimpuestos.pem'));
+    $objDSig->add509Cert(file_get_contents('key/publicKey.pem'));
 
     $objDSig->appendSignature($doc->documentElement);
     $doc->save($fileName);

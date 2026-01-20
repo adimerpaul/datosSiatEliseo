@@ -8,32 +8,32 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="ECB7F858";
-$codigo1="VCQUE5Q3AzNEFBk0ODUyMTVCQkU=Q3zDk0tIVVlKWlMzUyMjkyREE1Mz";
-$codigoControl1="711980CB7B12F74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="C5CD5D6";
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
+$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="CB4C4B6F";
-$codigo0="FBQTlDcDM0QUE=k0ODUyMTVCQkU=Q0s+ZEdVWUpaVUMzUyMjkyREE1Mz";
-$codigoControl0="892C4FBB7B12F74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="57C54491";
+$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QjlPM2hMVUJhVUMzcxNTE1QjRCMT";
+$codigoControl0="22ABCBD2987AF74"; //2023-03-01T16:55:06.383-04:00
 
 
-$codigoPuntoVenta=0;
-$codigoControl=$codigoControl0;
-$cufd=$codigo0;
-$cuis=$cuis0;
+$codigoPuntoVenta=1;
+$codigoControl=$codigoControl1;
+$cufd=$codigo1;
+$cuis=$cuis1;
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJheWFsYWVkc29uMjAxM0BnbWFpbC5jb20iLCJjb2RpZ29TaXN0ZW1hIjoiMzUyMjkyREE1Mzk0ODUyMTVCQkUiLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0xTlRVeE1UUXdNZ01BbnFhbE1Ba0FBQUE9IiwiaWQiOjUwNjIzNzIsImV4cCI6MTc2NzIxMDc2NywiaWF0IjoxNzU4NjcxNTM3LCJuaXREZWxlZ2FkbyI6NTU1NDQxMDI2LCJzdWJzaXN0ZW1hIjoiU0ZFIn0.g5L5FEVm6OUo0h1nzlf3iATSp_THBZMVWFU8nPsgzooncshKMnhILmg5O8m5T6UqG-sbDUWNE6ClIquVW0uPRw";
-$codigoAmbiente="2";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
+$codigoAmbiente=2;
 $codigoDocumentoSector=1;
 $codigoEmision=1;
-$codigoModalidad=2;
+$codigoModalidad=1;
 
-$cantidad=124;
+$cantidad=1;
 
-$codigoSistema="352292DA539485215BBE";
+$codigoSistema="371515B4B16CE0E3A916";
 $codigoSucursal=0;
 
-$nit="555441026";
+$nit="1010413026";
 $tipoFacturaDocumento=1;//1 con credito 2 sin credito 3 nota
 
 
@@ -58,7 +58,8 @@ for ($i=1;$i<=$cantidad;$i++){
     $cuf = new CUF();
     $cuf = $cuf->obtenerCUF($nit, date("YmdHis$miliSegundo"), $codigoSucursal, $codigoModalidad, $temision, $cdf, $tds, $nf, $codigoPuntoVenta);
     $cuf=$cuf.$codigoControl;
-    /*
+    error_log('CUF: '.$cuf);
+
     $data ="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <facturaElectronicaCompraVenta xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='facturaElectronicaCompraVenta.xsd'>
 <cabecera>
@@ -96,7 +97,7 @@ for ($i=1;$i<=$cantidad;$i++){
         <codigoDocumentoSector>1</codigoDocumentoSector>
     </cabecera>
         <detalle>
-        <actividadEconomica>477300</actividadEconomica>
+        <actividadEconomica>841001</actividadEconomica>
         <codigoProductoSin>99100</codigoProductoSin>
         <codigoProducto>JN-131231</codigoProducto>
         <descripcion>JUGO DE NARANJA EN VASO</descripcion>
@@ -108,8 +109,8 @@ for ($i=1;$i<=$cantidad;$i++){
         <numeroSerie>124548</numeroSerie>
         <numeroImei>545454</numeroImei>
     </detalle>
-</facturaElectronicaCompraVenta>";*/
-    $data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+</facturaElectronicaCompraVenta>";
+    /*$data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <facturaComputarizadaCompraVenta xsi:noNamespaceSchemaLocation='facturaComputarizadaCompraVenta.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
     <cabecera>
         <nitEmisor>$nit</nitEmisor>
@@ -158,7 +159,7 @@ for ($i=1;$i<=$cantidad;$i++){
         <numeroSerie>124548</numeroSerie>
         <numeroImei>545454</numeroImei>
     </detalle>
-</facturaComputarizadaCompraVenta>";
+</facturaComputarizadaCompraVenta>";*/
 
     $xml = new SimpleXMLElement($data);
     $dom = new DOMDocument('1.0');
@@ -168,11 +169,11 @@ for ($i=1;$i<=$cantidad;$i++){
     $nameFile=microtime();
     $dom->save("archivos/".$nameFile.'.xml');
 
-//    firmar("archivos/".$nameFile.'.xml');
+    firmar("archivos/".$nameFile.'.xml');
 
     $xml = new DOMDocument();
     $xml->load("archivos/".$nameFile.'.xml');
-    if (!$xml->schemaValidate('./facturaComputarizadaCompraVenta.xsd')) {
+    if (!$xml->schemaValidate('./facturaElectronicaCompraVenta.xsd')) {
         echo "invalid";
     }
     else {
@@ -218,8 +219,8 @@ for ($i=1;$i<=$cantidad;$i++){
         ]
     ]);
     var_dump($result);
-//    exit();
-//    sleep(1);
+////    exit();
+////    sleep(1);
     $result= $client->anulacionFactura([
         "SolicitudServicioAnulacionFactura"=>[
             "codigoAmbiente"=>$codigoAmbiente,
@@ -239,24 +240,24 @@ for ($i=1;$i<=$cantidad;$i++){
     ]);
     var_dump($result);
 //    exit();
-    $result= $client->reversionAnulacionFactura([
-        "SolicitudServicioReversionAnulacionFactura"=>[
-            "codigoAmbiente"=>$codigoAmbiente,
-            "codigoDocumentoSector"=>$codigoDocumentoSector,
-            "codigoEmision"=>$codigoEmision,
-            "codigoModalidad"=>$codigoModalidad,
-            "codigoPuntoVenta"=>$codigoPuntoVenta,
-            "codigoSistema"=>$codigoSistema,
-            "codigoSucursal"=>$codigoSucursal,
-            "cufd"=>$cufd,
-            "cuis"=>$cuis,
-            "nit"=>$nit,
-            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
-            "cuf"=>$cuf,
-        ]
-    ]);
-    var_dump($result);
-//    exit();
+//    $result= $client->reversionAnulacionFactura([
+//        "SolicitudServicioReversionAnulacionFactura"=>[
+//            "codigoAmbiente"=>$codigoAmbiente,
+//            "codigoDocumentoSector"=>$codigoDocumentoSector,
+//            "codigoEmision"=>$codigoEmision,
+//            "codigoModalidad"=>$codigoModalidad,
+//            "codigoPuntoVenta"=>$codigoPuntoVenta,
+//            "codigoSistema"=>$codigoSistema,
+//            "codigoSucursal"=>$codigoSucursal,
+//            "cufd"=>$cufd,
+//            "cuis"=>$cuis,
+//            "nit"=>$nit,
+//            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+//            "cuf"=>$cuf,
+//        ]
+//    ]);
+//    var_dump($result);
+////    exit();
 }
 
 

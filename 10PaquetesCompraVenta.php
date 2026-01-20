@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="ECB7F858";
-$codigo1="JBQTlDcDM0QUE=k0ODUyMTVCQkU=Q3lpbGdUQktaVUMzUyMjkyREE1Mz";
-$codigoControl1="11650A8C1D12F74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="C5CD5D6";
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
+$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="CB4C4B6F";
-$codigo0="FBQTlDcDM0QUE=k0ODUyMTVCQkU=Q28jSGdUQktaVUMzUyMjkyREE1Mz";
-$codigoControl0="4251998C1D12F74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="57C54491";
+$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QjlPM2hMVUJhVUMzcxNTE1QjRCMT";
+$codigoControl0="22ABCBD2987AF74"; //2023-03-01T16:55:06.383-04:00
 
 //3573986
 $codigoPuntoVenta=0;
@@ -24,10 +24,10 @@ $cuis=$cuis0;
 
 
 $cantidad=1;
-$codigoMotivoEvento=7;
-$h="19";
-$m="47";
-$s="01";
+$codigoMotivoEvento=4;
+$h="14";
+$m="34";
+$s="00";
 
 //$codigoEvento=3629231;
 
@@ -35,16 +35,16 @@ $s="01";
 //$s2=(int)$s+1;
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJheWFsYWVkc29uMjAxM0BnbWFpbC5jb20iLCJjb2RpZ29TaXN0ZW1hIjoiMzUyMjkyREE1Mzk0ODUyMTVCQkUiLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0xTlRVeE1UUXdNZ01BbnFhbE1Ba0FBQUE9IiwiaWQiOjUwNjIzNzIsImV4cCI6MTc2NzIxMDc2NywiaWF0IjoxNzU4NjcxNTM3LCJuaXREZWxlZ2FkbyI6NTU1NDQxMDI2LCJzdWJzaXN0ZW1hIjoiU0ZFIn0.g5L5FEVm6OUo0h1nzlf3iATSp_THBZMVWFU8nPsgzooncshKMnhILmg5O8m5T6UqG-sbDUWNE6ClIquVW0uPRw";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
 $codigoAmbiente="2";
 $codigoDocumentoSector=1; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=2;//1 online, 2 offline, 3 masiva
-$codigoModalidad=2;
+$codigoModalidad=1;
 
-$codigoSistema="352292DA539485215BBE";
+$codigoSistema="371515B4B16CE0E3A916";
 $codigoSucursal=0;
 
-$nit="555441026";
+$nit="1010413026";
 $tipoFacturaDocumento=1;
 
 
@@ -53,7 +53,7 @@ $tipoFacturaDocumento=1;
 //$temision=1; //1 online, 2 offline, 3 masiva
 $cdf=1; // 1 con credito fiscal 2 sin credito fiscal 3 nota credito debito
 $nf=1;
-$cafc="1011FCEF12A2C";
+//$cafc="1136CE62378D";
 
 for ($y=1;$y<=10;$y++){
     deleteFile();
@@ -98,7 +98,8 @@ for ($y=1;$y<=10;$y++){
         $cuf = new CUF();
         $cuf = $cuf->obtenerCUF($nit, date("Ymd".$h.$m.$s."$miliSegundo"), $codigoSucursal, $codigoModalidad, $codigoEmision, $cdf, $codigoDocumentoSector, $nf, $codigoPuntoVenta);
         $cuf=$cuf.$codigoControl;
-        $data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+
+        /*$data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <facturaComputarizadaCompraVenta xsi:noNamespaceSchemaLocation='facturaComputarizadaCompraVenta.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
     <cabecera>
         <nitEmisor>$nit</nitEmisor>
@@ -147,7 +148,56 @@ for ($y=1;$y<=10;$y++){
         <numeroSerie>124548</numeroSerie>
         <numeroImei>545454</numeroImei>
     </detalle>
-</facturaComputarizadaCompraVenta>";
+</facturaComputarizadaCompraVenta>";*/
+        $data = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<facturaElectronicaCompraVenta xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='facturaElectronicaCompraVenta.xsd'>    <cabecera>
+        <nitEmisor>$nit</nitEmisor>
+        <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
+        <municipio>La Paz</municipio>
+        <telefono>2846005</telefono>
+        <numeroFactura>1</numeroFactura>
+        <cuf>$cuf</cuf>
+        <cufd>$cufd</cufd>
+        <codigoSucursal>0</codigoSucursal>
+        <direccion>AV. JORGE LOPEZ #123</direccion>
+        <codigoPuntoVenta>$codigoPuntoVenta</codigoPuntoVenta>
+        <fechaEmision>$fechaEnvio</fechaEmision>
+        <nombreRazonSocial>Mi razon social</nombreRazonSocial>
+        <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
+        <numeroDocumento>5115889</numeroDocumento>
+        <complemento xsi:nil='true'/>
+        <codigoCliente>51158891</codigoCliente>
+        <codigoMetodoPago>1</codigoMetodoPago>
+        <numeroTarjeta xsi:nil='true'/>
+        <montoTotal>99</montoTotal>
+        <montoTotalSujetoIva>99</montoTotalSujetoIva>
+        <codigoMoneda>1</codigoMoneda>
+        <tipoCambio>1</tipoCambio>
+        <montoTotalMoneda>99</montoTotalMoneda>
+        <montoGiftCard xsi:nil='true'/>
+        <descuentoAdicional>1</descuentoAdicional>
+        <codigoExcepcion xsi:nil='true'/>
+        <cafc xsi:nil='true'/>
+        <leyenda>Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los
+            servicios que utilices.
+        </leyenda>
+        <usuario>pperez</usuario>
+        <codigoDocumentoSector>1</codigoDocumentoSector>
+    </cabecera>
+    <detalle>
+        <actividadEconomica>841001</actividadEconomica>
+        <codigoProductoSin>991009</codigoProductoSin>
+        <codigoProducto>JN-131231</codigoProducto>
+        <descripcion>JUGO DE NARANJA EN VASO</descripcion>
+        <cantidad>1</cantidad>
+        <unidadMedida>1</unidadMedida>
+        <precioUnitario>100</precioUnitario>
+        <montoDescuento>0</montoDescuento>
+        <subTotal>100</subTotal>
+        <numeroSerie>124548</numeroSerie>
+        <numeroImei>545454</numeroImei>
+    </detalle>
+</facturaElectronicaCompraVenta>";
         $xml = new SimpleXMLElement($data);
         $dom = new DOMDocument('1.0');
         $dom->preserveWhiteSpace = false;
@@ -156,17 +206,18 @@ for ($y=1;$y<=10;$y++){
         $nameFile=str_replace(' ', '', microtime());
         $dom->save("archivos/".$nameFile.'.xml');
 
-//        firmar("archivos/".$nameFile.'.xml');
+        firmar("archivos/".$nameFile.'.xml');
 
         $xml = new DOMDocument();
         $xml->load("archivos/".$nameFile.'.xml');
-        if (!$xml->schemaValidate('./facturaComputarizadaCompraVenta.xsd')) {
+        if (!$xml->schemaValidate('./facturaElectronicaCompraVenta.xsd')) {
             echo "invalid";
         }
         else {
             echo "$i validated\n";
         }
     }
+//    exit();
     $archiveName="archivos/archive".$y.".tar";
     createZip($archiveName);
     $archivo=getFileGzip($archiveName.".gz");
@@ -203,7 +254,7 @@ for ($y=1;$y<=10;$y++){
             "hashArchivo"=>$hashArchivo,
             "cantidadFacturas"=>$cantidad,
             "codigoEvento"=>$codigoEvento,
-            "cafc"=>$cafc,
+//            "cafc"=>$cafc,
         ]
     ]);
     var_dump($result);

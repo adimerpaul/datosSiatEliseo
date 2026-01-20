@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<facturaElectronicaServicioBasico xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="facturaElectronicaServicioBasico.xsd">
+  <cabecera>
+    <nitEmisor>1010413026</nitEmisor>
+    <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
+    <municipio>La Paz</municipio>
+    <telefono>2846005</telefono>
+    <numeroFactura>1</numeroFactura>
+    <cuf>4522A0B5D29A37F64F5679A58F4034A1E014B406B184F98C52987AF74</cuf>
+    <cufd>JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT</cufd>
+    <codigoSucursal>0</codigoSucursal>
+    <direccion>AV. JORGE LOPEZ #123</direccion>
+    <codigoPuntoVenta>1</codigoPuntoVenta>
+    <mes>Marzo</mes>
+    <gestion>2022</gestion>
+    <ciudad>La Paz</ciudad>
+    <zona>Alto Obrajes</zona>
+    <numeroMedidor>3456</numeroMedidor>
+    <fechaEmision>2026-01-19T18:50:19.193</fechaEmision>
+    <nombreRazonSocial>Mi razon social</nombreRazonSocial>
+    <domicilioCliente>Av. Tejada Sorzano 231</domicilioCliente>
+    <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
+    <numeroDocumento>5115889</numeroDocumento>
+    <complemento xsi:nil="true"/>
+    <codigoCliente>51158891</codigoCliente>
+    <codigoMetodoPago>1</codigoMetodoPago>
+    <numeroTarjeta xsi:nil="true"/>
+    <montoTotal>100.50</montoTotal>
+    <montoTotalSujetoIva>86</montoTotalSujetoIva>
+    <consumoPeriodo xsi:nil="true"/>
+    <beneficiarioLey1886 xsi:nil="true"/>
+    <montoDescuentoLey1886 xsi:nil="true"/>
+    <montoDescuentoTarifaDignidad xsi:nil="true"/>
+    <tasaAseo>5</tasaAseo>
+    <tasaAlumbrado>2</tasaAlumbrado>
+    <ajusteNoSujetoIva>5</ajusteNoSujetoIva>
+    <detalleAjusteNoSujetoIva>{'Ajuste por Reclamo':5}</detalleAjusteNoSujetoIva>
+    <ajusteSujetoIva>10</ajusteSujetoIva>
+    <detalleAjusteSujetoIva>{'Cobropor Reconexión':10}</detalleAjusteSujetoIva>
+    <otrosPagosNoSujetoIva>7</otrosPagosNoSujetoIva>
+    <detalleOtrosPagosNoSujetoIva>{'Pago Cuota Cooperativa':7}</detalleOtrosPagosNoSujetoIva>
+    <otrasTasas>0.50</otrasTasas>
+    <codigoMoneda>1</codigoMoneda>
+    <tipoCambio>1</tipoCambio>
+    <montoTotalMoneda>100.50</montoTotalMoneda>
+    <descuentoAdicional xsi:nil="true"/>
+    <codigoExcepcion xsi:nil="true"/>
+    <cafc xsi:nil="true"/>
+    <leyenda>Una leyenda</leyenda>
+    <usuario>vjcm</usuario>
+    <codigoDocumentoSector>13</codigoDocumentoSector>
+  </cabecera>
+  <detalle>
+    <actividadEconomica>841001</actividadEconomica>
+    <codigoProductoSin>991009</codigoProductoSin>
+    <codigoProducto>123456</codigoProducto>
+    <descripcion>Servicio Mes Febrero</descripcion>
+    <cantidad>1</cantidad>
+    <unidadMedida>58</unidadMedida>
+    <precioUnitario>76</precioUnitario>
+    <montoDescuento xsi:nil="true"/>
+    <subTotal>76</subTotal>
+  </detalle>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+  <ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>fI6IuUN3iZEI4eWS/cbJdNaOQtD8r/1j/uG4m2r9dAs=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>pSRnRVHOW0LIf0JvojHOvRdwiZeWK6pUxgXa3iFMvDELnMlTTni449gS81wkDacIV27zewRvCuSomqiJ254wIbgrKOcgwq/vBgr1ew7RGh9KEMrh1mGtEnLAmn5RDBXthPOK8WzhEt1w2JquJ7utQFRgm0Mf37yxxFulX7m4URjFgVqnc27e2RKMvPI0bw33M8z1M5N2qnAKp/vMUXhs0dd/JERbjbjtSVgytf/qG73gtFtF+QWc7/CZlYtplUcAarOqCcmuzmPWmPEQIJRDiOfmzDpeR0rWTZ04dAsEn/V3Okw5WD0JMCQyli3yOPYnAoH+NarBJw6aqP33Kwn51w==</ds:SignatureValue>
+<ds:KeyInfo><ds:X509Data><ds:X509Certificate>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</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></facturaElectronicaServicioBasico>
