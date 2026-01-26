@@ -9,18 +9,18 @@ require 'CUF.php';
 
 date_default_timezone_set('America/La_Paz');
 $cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
-$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qjlrd0hKVkJhVUMzcxNTE1QjRCMT";
+$codigoControl1="9EC5AD1DC87AF74"; //2023-03-01T16:56:05.359-04:00
 
 $cuis0="57C54491";
-$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QlVPSndTVUJhVUMzcxNTE1QjRCMT";
-$codigoControl0="66BC1E17987AF74"; //2023-03-01T16:55:06.383-04:00
+$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkE7VnJJVkJhVUMzcxNTE1QjRCMT";
+$codigoControl0="50369BBCC87AF74"; //2023-03-01T16:55:06.383-04:00
 
 
-$codigoPuntoVenta=0;
-$codigoControl=$codigoControl0;
-$cufd=$codigo0;
-$cuis=$cuis0;
+$codigoPuntoVenta=1;
+$codigoControl=$codigoControl1;
+$cufd=$codigo1;
+$cuis=$cuis1;
 
 
 $token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
@@ -41,8 +41,8 @@ $cdf=1; // 1 con credito fiscal 2 sin credito fiscal 3 nota credito debito
 $nf=1;
 
 $cantidadFacturas = 1;
-$h="19";
-$m="46";
+$h="08";
+$m="54";
 $s="00";
 
 for ($y=1;$y<=20;$y++){

@@ -9,12 +9,12 @@ require 'CUF.php';
 
 date_default_timezone_set('America/La_Paz');
 $cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
-$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
+$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qjlrd0hKVkJhVUMzcxNTE1QjRCMT";
+$codigoControl1="9EC5AD1DC87AF74"; //2023-03-01T16:56:05.359-04:00
 
 $cuis0="57C54491";
-$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QjlPM2hMVUJhVUMzcxNTE1QjRCMT";
-$codigoControl0="22ABCBD2987AF74"; //2023-03-01T16:55:06.383-04:00
+$codigo0="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qm8xYkZLV0JhVUMzcxNTE1QjRCMT";
+$codigoControl0="74A7AD49097AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=1;
@@ -53,6 +53,7 @@ deleteFile();
 //     * @param pos Punto de Venta
 
 for ($i=1;$i<=$cantidad;$i++){
+    /*
     $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
     $fechaEnvio=date("Y-m-d\TH:i:s").".$miliSegundo";
     $cuf = new CUF();
@@ -110,56 +111,7 @@ for ($i=1;$i<=$cantidad;$i++){
         <numeroImei>545454</numeroImei>
     </detalle>
 </facturaElectronicaCompraVenta>";
-    /*$data="<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<facturaComputarizadaCompraVenta xsi:noNamespaceSchemaLocation='facturaComputarizadaCompraVenta.xsd' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-    <cabecera>
-        <nitEmisor>$nit</nitEmisor>
-        <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
-        <municipio>La Paz</municipio>
-        <telefono>78595684</telefono>
-        <numeroFactura>1</numeroFactura>
-        <cuf>$cuf</cuf>
-        <cufd>$cufd</cufd>
-        <codigoSucursal>0</codigoSucursal>
-        <direccion>AV. JORGE LOPEZ #123</direccion>
-    <codigoPuntoVenta>$codigoPuntoVenta</codigoPuntoVenta>
-        <fechaEmision>$fechaEnvio</fechaEmision>
-        <nombreRazonSocial>Mi razon social</nombreRazonSocial>
-        <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
-        <numeroDocumento>5115889</numeroDocumento>
-        <complemento xsi:nil='true'/>
-        <codigoCliente>51158891</codigoCliente>
-        <codigoMetodoPago>1</codigoMetodoPago>
-        <numeroTarjeta xsi:nil='true'/>
-        <montoTotal>99</montoTotal>
-        <montoTotalSujetoIva>99</montoTotalSujetoIva>
-        <codigoMoneda>1</codigoMoneda>
-        <tipoCambio>1</tipoCambio>
-        <montoTotalMoneda>99</montoTotalMoneda>
-        <montoGiftCard xsi:nil='true'/>
-        <descuentoAdicional>1</descuentoAdicional>
-        <codigoExcepcion xsi:nil='true'/>
-        <cafc xsi:nil='true'/>
-        <leyenda>Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los
-            servicios que utilices.
-        </leyenda>
-        <usuario>pperez</usuario>
-        <codigoDocumentoSector>1</codigoDocumentoSector>
-    </cabecera>
-    <detalle>
-        <actividadEconomica>463000</actividadEconomica>
-        <codigoProductoSin>62121</codigoProductoSin>
-        <codigoProducto>JN-131231</codigoProducto>
-        <descripcion>JUGO DE NARANJA EN VASO</descripcion>
-        <cantidad>1</cantidad>
-        <unidadMedida>1</unidadMedida>
-        <precioUnitario>100</precioUnitario>
-        <montoDescuento>0</montoDescuento>
-        <subTotal>100</subTotal>
-        <numeroSerie>124548</numeroSerie>
-        <numeroImei>545454</numeroImei>
-    </detalle>
-</facturaComputarizadaCompraVenta>";*/
+
 
     $xml = new SimpleXMLElement($data);
     $dom = new DOMDocument('1.0');
@@ -219,24 +171,40 @@ for ($i=1;$i<=$cantidad;$i++){
         ]
     ]);
     var_dump($result);
+    */
 ////    exit();
 ////    sleep(1);
+     $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+     $data = [
+         "codigoAmbiente"=>$codigoAmbiente,
+         "codigoDocumentoSector"=>$codigoDocumentoSector,
+         "codigoEmision"=>$codigoEmision,
+         "codigoModalidad"=>$codigoModalidad,
+         "codigoPuntoVenta"=>$codigoPuntoVenta,
+         "codigoSistema"=>$codigoSistema,
+         "codigoSucursal"=>$codigoSucursal,
+         "cufd"=>$cufd,
+         "cuis"=>$cuis,
+         "nit"=>$nit,
+         "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+         "codigoMotivo"=>"1",
+         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
+//            "cuf"=>$cuf,
+     ];
+     error_log(print_r($data, true));
     $result= $client->anulacionFactura([
-        "SolicitudServicioAnulacionFactura"=>[
-            "codigoAmbiente"=>$codigoAmbiente,
-            "codigoDocumentoSector"=>$codigoDocumentoSector,
-            "codigoEmision"=>$codigoEmision,
-            "codigoModalidad"=>$codigoModalidad,
-            "codigoPuntoVenta"=>$codigoPuntoVenta,
-            "codigoSistema"=>$codigoSistema,
-            "codigoSucursal"=>$codigoSucursal,
-            "cufd"=>$cufd,
-            "cuis"=>$cuis,
-            "nit"=>$nit,
-            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
-            "codigoMotivo"=>"1",
-            "cuf"=>$cuf,
-        ]
+        "SolicitudServicioAnulacionFactura"=> $data
     ]);
     var_dump($result);
 //    exit();
