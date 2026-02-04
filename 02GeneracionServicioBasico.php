@@ -8,22 +8,21 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="9A0F4C66";
-$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QlVyWE5KZUhXVUJIwREU2OTlBMjJBR";
-$codigoControl1="0826769E55A6D74";
+$cuis1="E0904311";
+$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnwzQ1BQZUJhVUJIwREU2OTlBMjJBR";
+$codigoControl1="35D8CD29EA7AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="EB17D75E";
-$codigo0="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=Qm9SZkhMZUhXVUFIwREU2OTlBMjJBR";
-$codigoControl0="66A99EBF55A6D74";
-
-
-$codigoPuntoVenta=1;
-$codigoControl=$codigoControl1;
-$cufd=$codigo1;
-$cuis=$cuis1;
+$cuis0="2C3C1F15";
+$codigo0="BQUE5Q05FQkJBNzjdEODFGRDM1NkU=QsKhI3dhUGVCYVVIwREU2OTlBMjJBR";
+$codigoControl0="9DB54F39EA7AF74"; //2023-03-01T16:55:06.383-04:00
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTRUxBX09SVTgzMSIsImNvZGlnb1Npc3RlbWEiOiI3MjBERTY5OUEyMkFGN0Q4MUZEMzU2RSIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNRFF3TVRRMk1ESURBS2tRRzB3S0FBQUEiLCJpZCI6MjcyNjcsImV4cCI6MTY3MjQ0NDgwMCwiaWF0IjoxNjU1MTM1NzM2LCJuaXREZWxlZ2FkbyI6MTAxMDQxMzAyNiwic3Vic2lzdGVtYSI6IlNGRSJ9.dOFu7xY7ts0B6GVPKZ662HvdMBwElPfmxMs8hgrDpR9Y5aLsAkBvnvryfbp93D5XUq7ore0SQevztlxolFWxNA";
+$codigoPuntoVenta=0;
+$codigoControl=$codigoControl0;
+$cufd=$codigo0;
+$cuis=$cuis0;
+
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMERFNjk5QTIyQUY3RDgxRkQzNTZFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTE1ODksImlhdCI6MTc2OTQzNjM1OSwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.BQGlUf3cZLru_PtCPws35vqMrnvDfkyHTqxgizkt99Y0QuddVPFoNzv1_PM1SKyld8aPGaC6dbwnuyBRFogDFQ";
 $codigoAmbiente="2";
 $codigoDocumentoSector=13; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=1;
@@ -50,7 +49,7 @@ deleteFile();
 //     * @param nf Numero de Factura
 //     * @param pos Punto de Venta
 
-for ($i=1;$i<=125;$i++){
+for ($i=1;$i<=1;$i++){
     $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
     $fechaEnvio=date("Y-m-d\TH:i:s").".$miliSegundo";
     $cuf = new CUF();
@@ -180,6 +179,57 @@ for ($i=1;$i<=125;$i++){
         ]
     ]);
     var_dump($result);
+    $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionServicioBasico?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+    $data = [
+        "codigoAmbiente"=>$codigoAmbiente,
+        "codigoDocumentoSector"=>$codigoDocumentoSector,
+        "codigoEmision"=>$codigoEmision,
+        "codigoModalidad"=>$codigoModalidad,
+        "codigoPuntoVenta"=>$codigoPuntoVenta,
+        "codigoSistema"=>$codigoSistema,
+        "codigoSucursal"=>$codigoSucursal,
+        "cufd"=>$cufd,
+        "cuis"=>$cuis,
+        "nit"=>$nit,
+        "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+        "codigoMotivo"=>"1",
+//         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
+        "cuf"=>$cuf,
+    ];
+    error_log(print_r($data, true));
+    $result= $client->anulacionFactura([
+        "SolicitudServicioAnulacionFactura"=> $data
+    ]);
+    var_dump($result);
+    //    exit();
+    $result= $client->reversionAnulacionFactura([
+        "SolicitudServicioReversionAnulacionFactura"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "cuf"=>$cuf,
+        ]
+    ]);
+    var_dump($result);
 }
 
 
@@ -224,7 +274,7 @@ function firmar($fileName){
 
     $objDSig->sign($objKey);
 
-    $objDSig->add509Cert(file_get_contents('key/selaimpuestos.pem'));
+    $objDSig->add509Cert(file_get_contents('key/publickey.pem'));
 
     $objDSig->appendSignature($doc->documentElement);
     $doc->save($fileName);

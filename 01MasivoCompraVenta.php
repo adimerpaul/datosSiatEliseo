@@ -8,28 +8,28 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qjlrd0hKVkJhVUMzcxNTE1QjRCMT";
-$codigoControl1="9EC5AD1DC87AF74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="E0904311";
+$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnxkcVhLYkJhVUJIwREU2OTlBMjJBR";
+$codigoControl1="3B9A4F633A7AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="57C54491";
-$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkE7VnJJVkJhVUMzcxNTE1QjRCMT";
-$codigoControl0="50369BBCC87AF74"; //2023-03-01T16:55:06.383-04:00
-
-
-$codigoPuntoVenta=1;
-$codigoControl=$codigoControl1;
-$cufd=$codigo1;
-$cuis=$cuis1;
+$cuis0="2C3C1F15";
+$codigo0="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QlUwMVhLYkJhVUFIwREU2OTlBMjJBR";
+$codigoControl0="04E27F633A7AF74"; //2023-03-01T16:55:06.383-04:00
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
+$codigoPuntoVenta=0;
+$codigoControl=$codigoControl0;
+$cufd=$codigo0;
+$cuis=$cuis0;
+
+
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMERFNjk5QTIyQUY3RDgxRkQzNTZFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTE1ODksImlhdCI6MTc2OTQzNjM1OSwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.BQGlUf3cZLru_PtCPws35vqMrnvDfkyHTqxgizkt99Y0QuddVPFoNzv1_PM1SKyld8aPGaC6dbwnuyBRFogDFQ";
 $codigoAmbiente="2";
 $codigoDocumentoSector=1; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=3;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="371515B4B16CE0E3A916";
+$codigoSistema="720DE699A22AF7D81FD356E";
 $codigoSucursal=0;
 
 $nit="1010413026";
@@ -40,12 +40,12 @@ $tipoFacturaDocumento=1;
 $cdf=1; // 1 con credito fiscal 2 sin credito fiscal 3 nota credito debito
 $nf=1;
 
-$cantidadFacturas = 1;
-$h="08";
-$m="54";
+$cantidadFacturas = 1000;
+$h="11";
+$m="12";
 $s="00";
-
-for ($y=1;$y<=20;$y++){
+//for ($y=1;$y<=20;$y++){
+for ($y=1;$y<=1;$y++){
     deleteFile();
 //     * @param nit NIT emisor
 //     * @param fh Fecha y Hora en formato yyyyMMddHHmmssSSS

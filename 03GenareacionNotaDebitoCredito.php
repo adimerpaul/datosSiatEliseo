@@ -8,27 +8,28 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
-$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="E0904311";
+$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnxkcVhLYkJhVUJIwREU2OTlBMjJBR";
+$codigoControl1="3B9A4F633A7AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="57C54491";
-$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QjlPM2hMVUJhVUMzcxNTE1QjRCMT";
-$codigoControl0="22ABCBD2987AF74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="2C3C1F15";
+$codigo0="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QlUwMVhLYkJhVUFIwREU2OTlBMjJBR";
+$codigoControl0="04E27F633A7AF74"; //2023-03-01T16:55:06.383-04:00
 
 
-$codigoPuntoVenta=0;
-$codigoControl=$codigoControl0;
-$cufd=$codigo0;
-$cuis=$cuis0;
+$codigoPuntoVenta=1;
+$codigoControl=$codigoControl1;
+$cufd=$codigo1;
+$cuis=$cuis1;
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTRUxBX09SVTgzMSIsImNvZGlnb1Npc3RlbWEiOiI3MjBERTY5OUEyMkFGN0Q4MUZEMzU2RSIsIm5pdCI6Ikg0c0lBQUFBQUFBQUFETTBNRFF3TVRRMk1ESURBS2tRRzB3S0FBQUEiLCJpZCI6MjcyNjcsImV4cCI6MTY3MjQ0NDgwMCwiaWF0IjoxNjU1MTM1NzM2LCJuaXREZWxlZ2FkbyI6MTAxMDQxMzAyNiwic3Vic2lzdGVtYSI6IlNGRSJ9.dOFu7xY7ts0B6GVPKZ662HvdMBwElPfmxMs8hgrDpR9Y5aLsAkBvnvryfbp93D5XUq7ore0SQevztlxolFWxNA";
+
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMERFNjk5QTIyQUY3RDgxRkQzNTZFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTE1ODksImlhdCI6MTc2OTQzNjM1OSwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.BQGlUf3cZLru_PtCPws35vqMrnvDfkyHTqxgizkt99Y0QuddVPFoNzv1_PM1SKyld8aPGaC6dbwnuyBRFogDFQ";
 $codigoAmbiente="2";
 $codigoDocumentoSector=24; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=1;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="371515B4B16CE0E3A916";
+$codigoSistema="720DE699A22AF7D81FD356E";
 $codigoSucursal=0;
 
 $nit="1010413026";
@@ -191,6 +192,23 @@ for ($i=1;$i<=1;$i++){
         ]
     ]);
     var_dump($result);
+    $result= $client->reversionAnulacionDocumentoAjuste([
+        "SolicitudServicioReversionAnulacionDocumentoAjuste"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "cuf"=>$cuf,
+        ]
+    ]);
+    var_dump($result);
 }
 
 
@@ -235,7 +253,7 @@ function firmar($fileName){
 
     $objDSig->sign($objKey);
 
-    $objDSig->add509Cert(file_get_contents('key/publicKey.pem'));
+    $objDSig->add509Cert(file_get_contents('key/publickey.pem'));
 
     $objDSig->appendSignature($doc->documentElement);
     $doc->save($fileName);

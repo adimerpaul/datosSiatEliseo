@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<facturaElectronicaCompraVenta xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="facturaElectronicaCompraVenta.xsd">
+  <cabecera>
+    <nitEmisor>329448023</nitEmisor>
+    <razonSocialEmisor>Carlos Loza</razonSocialEmisor>
+    <municipio>La Paz</municipio>
+    <telefono>2846005</telefono>
+    <numeroFactura>1</numeroFactura>
+    <cuf>168AB0075D0EA15B57690B9129B5539A99CC9E06B39B271D1C5C8AF74</cuf>
+    <cufd>BQWVDd15nQUE=NzDRCMTBDQkZBREU=QmVrZ3FKRkNhVUJIxRDQ0NDQwMEFFM</cufd>
+    <codigoSucursal>0</codigoSucursal>
+    <direccion>AV. JORGE LOPEZ #123</direccion>
+    <codigoPuntoVenta>1</codigoPuntoVenta>
+    <fechaEmision>2026-02-04T09:48:27.001</fechaEmision>
+    <nombreRazonSocial>Mi razon social</nombreRazonSocial>
+    <codigoTipoDocumentoIdentidad>1</codigoTipoDocumentoIdentidad>
+    <numeroDocumento>5115889</numeroDocumento>
+    <complemento xsi:nil="true"/>
+    <codigoCliente>51158891</codigoCliente>
+    <codigoMetodoPago>1</codigoMetodoPago>
+    <numeroTarjeta xsi:nil="true"/>
+    <montoTotal>99</montoTotal>
+    <montoTotalSujetoIva>99</montoTotalSujetoIva>
+    <codigoMoneda>1</codigoMoneda>
+    <tipoCambio>1</tipoCambio>
+    <montoTotalMoneda>99</montoTotalMoneda>
+    <montoGiftCard xsi:nil="true"/>
+    <descuentoAdicional>1</descuentoAdicional>
+    <codigoExcepcion xsi:nil="true"/>
+    <cafc xsi:nil="true"/>
+    <leyenda>Ley N° 453: Tienes derecho a recibir información sobre las características y contenidos de los
+            servicios que utilices.
+        </leyenda>
+    <usuario>pperez</usuario>
+    <codigoDocumentoSector>1</codigoDocumentoSector>
+  </cabecera>
+  <detalle>
+    <actividadEconomica>5911000</actividadEconomica>
+    <codigoProductoSin>1003870</codigoProductoSin>
+    <codigoProducto>JN-131231</codigoProducto>
+    <descripcion>JUGO DE NARANJA EN VASO</descripcion>
+    <cantidad>1</cantidad>
+    <unidadMedida>1</unidadMedida>
+    <precioUnitario>100</precioUnitario>
+    <montoDescuento>0</montoDescuento>
+    <subTotal>100</subTotal>
+    <numeroSerie>124548</numeroSerie>
+    <numeroImei>545454</numeroImei>
+  </detalle>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+  <ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>sDnMBcqnanp+QDRHSyJS/oEY5HN49wW0Fs/OpeGjrdY=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Anq3Ear6HmDxEd5M1RUoJO6ShaG6WGWrIhjm/03PgZfseFqjQTatNH5aK7HjZikHCMXQkBBBqLanpGA+VlAwKN/mTtKwWY7igpbBsIcL+YlRJV3ZmYoOZv5sgrQNnh+NzEw8tM1yw+bhhaF0sL1XJlwEaTbSSYlTJ5QDZKIVoQWtEOQ8fqJjaNfWmGmuYItAPKv0bq0NW8Ugw0m8V32pr/Yv6maLlJ8GmcHmCvVbbYVzHIUpeN2ug2PC3h1RVDiYIzHmwpvLTwZSj3JIxa3Pw8SwjEyFbaSOVi0Nsz1R/74kKazrHf4kUOfO29rhK+d5EIMj9gwK5etoivdLhI7MqA==</ds:SignatureValue>
+<ds:KeyInfo><ds:X509Data><ds:X509Certificate>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</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></facturaElectronicaCompraVenta>

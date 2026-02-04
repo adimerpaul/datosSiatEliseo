@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qjlrd0hKVkJhVUMzcxNTE1QjRCMT";
-$codigoControl1="9EC5AD1DC87AF74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="FC72FDEE";
+$codigo1="BQWVDd15nQUE=NzDRCMTBDQkZBREU=QmVrZ3FKRkNhVUJIxRDQ0NDQwMEFFM";
+$codigoControl1="9B271D1C5C8AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="57C54491";
-$codigo0="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=Qm8xYkZLV0JhVUMzcxNTE1QjRCMT";
-$codigoControl0="74A7AD49097AF74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="B398BC11";
+$codigo0="BQUFlQ3deZ0FBNzDRCMTBDQkZBREU=QsKhQm5rSkZDYVVIxRDQ0NDQwMEFFM";
+$codigoControl0="8969041C5C8AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=1;
@@ -22,7 +22,7 @@ $codigoControl=$codigoControl1;
 $cufd=$codigo1;
 $cuis=$cuis1;
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleWdpbGFjaGFjb2xsbzdAZ21haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMUQ0NDQ0MDBBRTA0QjEwQ0JGQURFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNMnNqUXhzVEF3TWdZQWZBZTRnd2tBQUFBPSIsImlkIjo1MzEyNTc5LCJleHAiOjE4MDA5MzUyNTgsImlhdCI6MTc2OTQxMzYyOCwibml0RGVsZWdhZG8iOjMyOTQ0ODAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.JyaMLhLx4B9u8C1jwlXK_Zj9o_R2__RoV0S3groe8rusxEVtEK76EettvmMGyW_Mv9e4y5fVWFRPicfvhlE02g";
 $codigoAmbiente=2;
 $codigoDocumentoSector=1;
 $codigoEmision=1;
@@ -30,10 +30,10 @@ $codigoModalidad=1;
 
 $cantidad=1;
 
-$codigoSistema="371515B4B16CE0E3A916";
+$codigoSistema="721D444400AE04B10CBFADE";
 $codigoSucursal=0;
 
-$nit="1010413026";
+$nit="329448023";
 $tipoFacturaDocumento=1;//1 con credito 2 sin credito 3 nota
 
 
@@ -53,7 +53,7 @@ deleteFile();
 //     * @param pos Punto de Venta
 
 for ($i=1;$i<=$cantidad;$i++){
-    /*
+
     $miliSegundo=str_pad($i, 3, '0', STR_PAD_LEFT);
     $fechaEnvio=date("Y-m-d\TH:i:s").".$miliSegundo";
     $cuf = new CUF();
@@ -98,8 +98,8 @@ for ($i=1;$i<=$cantidad;$i++){
         <codigoDocumentoSector>1</codigoDocumentoSector>
     </cabecera>
         <detalle>
-        <actividadEconomica>841001</actividadEconomica>
-        <codigoProductoSin>99100</codigoProductoSin>
+        <actividadEconomica>5911000</actividadEconomica>
+        <codigoProductoSin>1003870</codigoProductoSin>
         <codigoProducto>JN-131231</codigoProducto>
         <descripcion>JUGO DE NARANJA EN VASO</descripcion>
         <cantidad>1</cantidad>
@@ -171,7 +171,7 @@ for ($i=1;$i<=$cantidad;$i++){
         ]
     ]);
     var_dump($result);
-    */
+
 ////    exit();
 ////    sleep(1);
      $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionCompraVenta?WSDL",  [
@@ -199,8 +199,8 @@ for ($i=1;$i<=$cantidad;$i++){
          "nit"=>$nit,
          "tipoFacturaDocumento"=>$tipoFacturaDocumento,
          "codigoMotivo"=>"1",
-         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
-//            "cuf"=>$cuf,
+//         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
+            "cuf"=>$cuf,
      ];
      error_log(print_r($data, true));
     $result= $client->anulacionFactura([
@@ -208,23 +208,23 @@ for ($i=1;$i<=$cantidad;$i++){
     ]);
     var_dump($result);
 //    exit();
-//    $result= $client->reversionAnulacionFactura([
-//        "SolicitudServicioReversionAnulacionFactura"=>[
-//            "codigoAmbiente"=>$codigoAmbiente,
-//            "codigoDocumentoSector"=>$codigoDocumentoSector,
-//            "codigoEmision"=>$codigoEmision,
-//            "codigoModalidad"=>$codigoModalidad,
-//            "codigoPuntoVenta"=>$codigoPuntoVenta,
-//            "codigoSistema"=>$codigoSistema,
-//            "codigoSucursal"=>$codigoSucursal,
-//            "cufd"=>$cufd,
-//            "cuis"=>$cuis,
-//            "nit"=>$nit,
-//            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
-//            "cuf"=>$cuf,
-//        ]
-//    ]);
-//    var_dump($result);
+    $result= $client->reversionAnulacionFactura([
+        "SolicitudServicioReversionAnulacionFactura"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "cuf"=>$cuf,
+        ]
+    ]);
+    var_dump($result);
 ////    exit();
 }
 

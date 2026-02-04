@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="C5CD5D6";
-$codigo1="JBQTlDTkVCQkE=ZDRTBFM0E5MTY=QkFhT3lLVUJhVUMzcxNTE1QjRCMT";
-$codigoControl1="84F98C52987AF74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="E0904311";
+$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnwzQ1BQZUJhVUJIwREU2OTlBMjJBR";
+$codigoControl1="35D8CD29EA7AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="57C54491";
-$codigo0="FBQTlDTkVCQkE=ZDRTBFM0E5MTY=QlVPSndTVUJhVUMzcxNTE1QjRCMT";
-$codigoControl0="66BC1E17987AF74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="2C3C1F15";
+$codigo0="BQUE5Q05FQkJBNzjdEODFGRDM1NkU=QsKhI3dhUGVCYVVIwREU2OTlBMjJBR";
+$codigoControl0="9DB54F39EA7AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=0;
@@ -24,25 +24,25 @@ $cuis=$cuis0;
 
 
 $cantidad=1;
-$codigoMotivoEvento=4;
-$h="18";
-$m="49";
+$codigoMotivoEvento=7;
+$h="15";
+$m="46";
 $s="00";
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMERFNjk5QTIyQUY3RDgxRkQzNTZFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTE1ODksImlhdCI6MTc2OTQzNjM1OSwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.BQGlUf3cZLru_PtCPws35vqMrnvDfkyHTqxgizkt99Y0QuddVPFoNzv1_PM1SKyld8aPGaC6dbwnuyBRFogDFQ";
 $codigoAmbiente="2";
 $codigoDocumentoSector=13; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=2;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="371515B4B16CE0E3A916";
+$codigoSistema="720DE699A22AF7D81FD356E";
 $codigoSucursal=0;
 
 $nit="1010413026";
 $tipoFacturaDocumento=1;
 
-
+$cafc="113583036402E";
 //$temision=1; //1 online, 2 offline, 3 masiva
 $cdf=1; // 1 con credito fiscal 2 sin credito fiscal 3 nota credito debito
 $nf=1;
@@ -57,7 +57,7 @@ deleteFile();
 //     * @param nf Numero de Factura
 //     * @param pos Punto de Venta
 
-for ($y=1;$y<=10;$y++){
+for ($y=1;$y<=1;$y++){
     deleteFile();
     $client = new SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/FacturacionOperaciones?WSDL",  [
         'stream_context' => stream_context_create([
@@ -199,7 +199,7 @@ for ($y=1;$y<=10;$y++){
         <montoTotalMoneda>100.50</montoTotalMoneda>
         <descuentoAdicional xsi:nil='true'/>
         <codigoExcepcion xsi:nil='true'/>
-        <cafc xsi:nil='true'/>
+        <cafc>$cafc</cafc>
         <leyenda>Una leyenda</leyenda>
         <usuario>vjcm</usuario>
         <codigoDocumentoSector>13</codigoDocumentoSector>
@@ -273,7 +273,7 @@ for ($y=1;$y<=10;$y++){
             "hashArchivo"=>$hashArchivo,
             "cantidadFacturas"=>$cantidad,
             "codigoEvento"=>$codigoEvento,
-//            "cafc"=>$cafc,
+            "cafc"=>$cafc,
         ]
     ]);
     var_dump($result);

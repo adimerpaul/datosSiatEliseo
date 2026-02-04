@@ -1,15 +1,15 @@
 <?php
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="C5CD5D6";
-$cuis0="57C54491";
+$cuis1="FC72FDEE";
+$cuis0="B398BC11";
 $codigoPuntoVenta=0;
 $cuis=$cuis0;
 
-$nit="1010413026";
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjM3MTUxNUI0QjE2Q0UwRTNBOTE2Iiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTMwNzIsImlhdCI6MTc2ODgzMzA0Miwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.zNYCnKSUrrsiolNlHC3PuYUQ0pNap_YjLWJPOYJ2kDZPNdc6imqUZmAnQxUgrokBxwNOWiE0M7NugDESR68geA";
+$nit="329448023";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleWdpbGFjaGFjb2xsbzdAZ21haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMUQ0NDQ0MDBBRTA0QjEwQ0JGQURFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNMnNqUXhzVEF3TWdZQWZBZTRnd2tBQUFBPSIsImlkIjo1MzEyNTc5LCJleHAiOjE4MDA5MzUyNTgsImlhdCI6MTc2OTQxMzYyOCwibml0RGVsZWdhZG8iOjMyOTQ0ODAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.JyaMLhLx4B9u8C1jwlXK_Zj9o_R2__RoV0S3groe8rusxEVtEK76EettvmMGyW_Mv9e4y5fVWFRPicfvhlE02g";
 $codigoAmbiente=2;
-$codigoSistema="371515B4B16CE0E3A916";
+$codigoSistema="721D444400AE04B10CBFADE";
 
 $contador = 1;
 
@@ -38,7 +38,7 @@ for ($i=0; $i < $contador; $i++) {
     ];
     $result= $client->sincronizarActividades($data);
 //    error_log(json_encode($result));
-    var_dump($result);
+//    var_dump($result);
 //    exit();
 
     $result= $client->sincronizarFechaHora($data);
@@ -55,7 +55,7 @@ for ($i=0; $i < $contador; $i++) {
 
     $result= $client->sincronizarListaProductosServicios($data);
 //    error_log(json_encode($result));
-//    var_dump($result);
+    var_dump($result);
 
     $result= $client->sincronizarParametricaEventosSignificativos($data);
 //    var_dump($result);
