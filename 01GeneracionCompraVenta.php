@@ -202,7 +202,7 @@ for ($i=1;$i<=$cantidad;$i++){
 //         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
             "cuf"=>$cuf,
      ];
-     error_log(print_r($data, true));
+//     error_log(print_r($data, true));
     $result= $client->anulacionFactura([
         "SolicitudServicioAnulacionFactura"=> $data
     ]);

@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="E0904311";
-$codigo1="BQTlDTkVCQkE=NzjdEODFGRDM1NkU=QnwzQ1BQZUJhVUJIwREU2OTlBMjJBR";
-$codigoControl1="35D8CD29EA7AF74"; //2023-03-01T16:56:05.359-04:00
+$cuis1="FC72FDEE";
+$codigo1="BQWVDd15nQUE=NzDRCMTBDQkZBREU=QmVrZ3FKRkNhVUJIxRDQ0NDQwMEFFM";
+$codigoControl1="9B271D1C5C8AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="2C3C1F15";
-$codigo0="BQUE5Q05FQkJBNzjdEODFGRDM1NkU=QsKhI3dhUGVCYVVIwREU2OTlBMjJBR";
-$codigoControl0="9DB54F39EA7AF74"; //2023-03-01T16:55:06.383-04:00
+$cuis0="B398BC11";
+$codigo0="BQUFlQ3deZ0FBNzDRCMTBDQkZBREU=QsKhQm5rSkZDYVVIxRDQ0NDQwMEFFM";
+$codigoControl0="8969041C5C8AF74"; //2023-03-01T16:55:06.383-04:00
 
 //3573986
 $codigoPuntoVenta=1;
@@ -23,10 +23,10 @@ $cufd=$codigo1;
 $cuis=$cuis1;
 
 
-$cantidad=500;
+$cantidad=1;
 $codigoMotivoEvento=7;
 $h="15";
-$m="37";
+$m="54";
 $s="00";
 
 //$codigoEvento=3629231;
@@ -35,16 +35,16 @@ $s="00";
 //$s2=(int)$s+1;
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbXB1ZXN0b3Nfc2VsYTI2QGhvdG1haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMERFNjk5QTIyQUY3RDgxRkQzNTZFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNME1EUXdNVFEyTURJREFLa1FHMHdLQUFBQSIsImlkIjo1MjM3NDgyLCJleHAiOjE3OTg3MTE1ODksImlhdCI6MTc2OTQzNjM1OSwibml0RGVsZWdhZG8iOjEwMTA0MTMwMjYsInN1YnNpc3RlbWEiOiJTRkUifQ.BQGlUf3cZLru_PtCPws35vqMrnvDfkyHTqxgizkt99Y0QuddVPFoNzv1_PM1SKyld8aPGaC6dbwnuyBRFogDFQ";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleWdpbGFjaGFjb2xsbzdAZ21haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMUQ0NDQ0MDBBRTA0QjEwQ0JGQURFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNMnNqUXhzVEF3TWdZQWZBZTRnd2tBQUFBPSIsImlkIjo1MzEyNTc5LCJleHAiOjE4MDA5MzUyNTgsImlhdCI6MTc2OTQxMzYyOCwibml0RGVsZWdhZG8iOjMyOTQ0ODAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.JyaMLhLx4B9u8C1jwlXK_Zj9o_R2__RoV0S3groe8rusxEVtEK76EettvmMGyW_Mv9e4y5fVWFRPicfvhlE02g";
 $codigoAmbiente="2";
 $codigoDocumentoSector=1; //1 compra venta, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=2;//1 online, 2 offline, 3 masiva
 $codigoModalidad=1;
 
-$codigoSistema="720DE699A22AF7D81FD356E";
+$codigoSistema="721D444400AE04B10CBFADE";
 $codigoSucursal=0;
 
-$nit="1010413026";
+$nit="329448023";
 $tipoFacturaDocumento=1;
 
 
@@ -55,7 +55,7 @@ $cdf=1; // 1 con credito fiscal 2 sin credito fiscal 3 nota credito debito
 $nf=1;
 //$cafc="1136CE62378D";
 
-$cafc="1013BDACA079E";
+$cafc="301C4C1A5C82E";
 
 for ($y=1;$y<=1;$y++){
     deleteFile();
@@ -187,8 +187,8 @@ for ($y=1;$y<=1;$y++){
         <codigoDocumentoSector>1</codigoDocumentoSector>
     </cabecera>
     <detalle>
-        <actividadEconomica>841001</actividadEconomica>
-        <codigoProductoSin>991009</codigoProductoSin>
+        <actividadEconomica>5911000</actividadEconomica>
+        <codigoProductoSin>1003870</codigoProductoSin>
         <codigoProducto>JN-131231</codigoProducto>
         <descripcion>JUGO DE NARANJA EN VASO</descripcion>
         <cantidad>1</cantidad>

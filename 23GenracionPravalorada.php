@@ -8,13 +8,13 @@ require 'CUF.php';
 
 
 date_default_timezone_set('America/La_Paz');
-$cuis1="B5BEEE8A";
-$codigo1="CQUFlQ3deZ0FBNzDRCMTBDQkZBREU=QsKhV21nV1hJV1VIxRDQ0NDQwMEFFM";
-$codigoControl1="2354BEAD0BB6D74";
+$cuis1="FC72FDEE";
+$codigo1="BQWVDd15nQUE=NzDRCMTBDQkZBREU=QmVrZ3FKRkNhVUJIxRDQ0NDQwMEFFM";
+$codigoControl1="9B271D1C5C8AF74"; //2023-03-01T16:56:05.359-04:00
 
-$cuis0="5B5A5502";
-$codigo0="BQWVDd15nQUE=NzDRCMTBDQkZBREU=QlU1dlRXWElXVUFIxRDQ0NDQwMEFFM";
-$codigoControl0="5AA20B9D0BB6D74";
+$cuis0="B398BC11";
+$codigo0="BQUFlQ3deZ0FBNzDRCMTBDQkZBREU=QsKhQm5rSkZDYVVIxRDQ0NDQwMEFFM";
+$codigoControl0="8969041C5C8AF74"; //2023-03-01T16:55:06.383-04:00
 
 
 $codigoPuntoVenta=1;
@@ -23,8 +23,8 @@ $cufd=$codigo1;
 $cuis=$cuis1;
 
 
-$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNVUxUSVNBTEFTIiwiY29kaWdvU2lzdGVtYSI6IjcyMUQ0NDQ0MDBBRTA0QjEwQ0JGQURFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNMnNqUXhzVEF3TWdZQWZBZTRnd2tBQUFBPSIsImlkIjo1NzEwMTgsImV4cCI6MTY2NDQ5NjAwMCwiaWF0IjoxNjYwNzgxMzQyLCJuaXREZWxlZ2FkbyI6MzI5NDQ4MDIzLCJzdWJzaXN0ZW1hIjoiU0ZFIn0.IdIp7K0t4aod_CooxZ7MzhSFn6xgjiuhqKThKwcphqKSxeLcM9N84-CvFWeA5Q3pJSyxcoarWh7pk6pCajpVuA";
-$codigoAmbiente="2";
+$token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJleWdpbGFjaGFjb2xsbzdAZ21haWwuY29tIiwiY29kaWdvU2lzdGVtYSI6IjcyMUQ0NDQ0MDBBRTA0QjEwQ0JGQURFIiwibml0IjoiSDRzSUFBQUFBQUFBQURNMnNqUXhzVEF3TWdZQWZBZTRnd2tBQUFBPSIsImlkIjo1MzEyNTc5LCJleHAiOjE4MDA5MzUyNTgsImlhdCI6MTc2OTQxMzYyOCwibml0RGVsZWdhZG8iOjMyOTQ0ODAyMywic3Vic2lzdGVtYSI6IlNGRSJ9.JyaMLhLx4B9u8C1jwlXK_Zj9o_R2__RoV0S3groe8rusxEVtEK76EettvmMGyW_Mv9e4y5fVWFRPicfvhlE02g";
+$codigoAmbiente=2;
 $codigoDocumentoSector=23; //1 compra venta,// 2qlauilres, 13 servicios basicos, 24 nota credito debito, 29 nota conciliacion
 $codigoEmision=1;
 $codigoModalidad=1;
@@ -153,6 +153,57 @@ for ($i=1;$i<=125;$i++){
             "archivo"=>$archivo,
             "fechaEnvio"=>$fechaEnvio,
             "hashArchivo"=>$hashArchivo,
+        ]
+    ]);
+    var_dump($result);
+    $client = new \SoapClient("https://pilotosiatservicios.impuestos.gob.bo/v2/ServicioFacturacionElectronica?WSDL",  [
+        'stream_context' => stream_context_create([
+            'http' => [
+                'header' => "apikey: TokenApi " . $token,
+            ]
+        ]),
+        'cache_wsdl' => WSDL_CACHE_NONE,
+        'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+        'trace' => 1,
+        'use' => SOAP_LITERAL,
+        'style' => SOAP_DOCUMENT,
+    ]);
+    $data = [
+        "codigoAmbiente"=>$codigoAmbiente,
+        "codigoDocumentoSector"=>$codigoDocumentoSector,
+        "codigoEmision"=>$codigoEmision,
+        "codigoModalidad"=>$codigoModalidad,
+        "codigoPuntoVenta"=>$codigoPuntoVenta,
+        "codigoSistema"=>$codigoSistema,
+        "codigoSucursal"=>$codigoSucursal,
+        "cufd"=>$cufd,
+        "cuis"=>$cuis,
+        "nit"=>$nit,
+        "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+        "codigoMotivo"=>"1",
+//         "cuf"=>"4522A0B5D29A38257E2BEE26C7AF4441330C9E06AF9EC5AD1DC87AF74",
+        "cuf"=>$cuf,
+    ];
+//     error_log(print_r($data, true));
+    $result= $client->anulacionFactura([
+        "SolicitudServicioAnulacionFactura"=> $data
+    ]);
+    var_dump($result);
+//    exit();
+    $result= $client->reversionAnulacionFactura([
+        "SolicitudServicioReversionAnulacionFactura"=>[
+            "codigoAmbiente"=>$codigoAmbiente,
+            "codigoDocumentoSector"=>$codigoDocumentoSector,
+            "codigoEmision"=>$codigoEmision,
+            "codigoModalidad"=>$codigoModalidad,
+            "codigoPuntoVenta"=>$codigoPuntoVenta,
+            "codigoSistema"=>$codigoSistema,
+            "codigoSucursal"=>$codigoSucursal,
+            "cufd"=>$cufd,
+            "cuis"=>$cuis,
+            "nit"=>$nit,
+            "tipoFacturaDocumento"=>$tipoFacturaDocumento,
+            "cuf"=>$cuf,
         ]
     ]);
     var_dump($result);
